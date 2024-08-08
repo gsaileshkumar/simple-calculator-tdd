@@ -6,8 +6,21 @@ const add = (stringExp: string) => {
   if (stringExp === '') {
     return 0;
   }
+
+  let delimiter = /[,\n]/;
+  let numbersPart = stringExp;
+
+  if (stringExp.startsWith('//')) {
+    const delimiterEndIndex = stringExp.indexOf('\n');
+    if (delimiterEndIndex !== -1) {
+      const customDelimiter = stringExp.substring(2, delimiterEndIndex);
+      const escapedDelimiter = customDelimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      delimiter = new RegExp(escapedDelimiter);
+      numbersPart = stringExp.substring(delimiterEndIndex + 1);
+    }
+  }
     
-  const numbers = stringExp.split(/[,|\n]/)
+  const numbers = numbersPart.split(delimiter)
     .map(num => num.trim())
     .filter(num => num !== '')
     .map(num => {
