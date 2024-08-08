@@ -30,6 +30,11 @@ const add = (stringExp: string) => {
       }
       return parsed;
     });
+
+  const negativeNumbers = numbers.filter(num => num < 0);
+  if (negativeNumbers.length > 0) {
+    throw new Error(`Negative numbers not allowed: ${negativeNumbers.join(', ')}`);
+  }
     
   return numbers.reduce((sum, num) => sum + num, 0); 
 }
