@@ -20,9 +20,7 @@ describe('Add functionality in calculator', () => {
   test('should return the correct sum for the input string delimited by comma', () => {
     expect(add('3,6')).toBe(9)
     expect(add('1,11')).toBe(12)
-    expect(add('3,-6')).toBe(-3)
-    expect(add('-10,-20')).toBe(-30)
-    expect(add('-10,10')).toBe(0)
+    expect(add('1,0')).toBe(1)
   })
 
   test('should throw error if the inputs are not number', () => {
@@ -36,9 +34,7 @@ describe('Add functionality in calculator', () => {
   
   test('should return the correct sum for any amount of numbers in input string delimited by comma', () => {
     expect(add('3,6,3')).toBe(12)
-    expect(add('3,-6,20,3')).toBe(20)
-    expect(add('-10,-20,-2,-10')).toBe(-42)
-    expect(add('-10,10,20,-20,30,-30')).toBe(0)
+    expect(add('3,6,20,3')).toBe(32)
   })
   
   test('should return the correct sum for input string delimited by new lines', () => {
@@ -68,6 +64,12 @@ describe('Add functionality in calculator', () => {
 
   test('should throw error for invalid numbers with custom delimiter', () => {
     expect(() => add('//;\n1;a')).toThrowError('Invalid number');
+  });
+
+  test('should throw error for negative numbers', () => {
+    expect(() => add('1,-2,3')).toThrowError('Negative numbers not allowed: -2');
+    expect(() => add('1,-2\n-3')).toThrowError('Negative numbers not allowed: -2, -3');
+    expect(() => add('//;\n-1;2;-3')).toThrowError('Negative numbers not allowed: -1, -3');
   });
 
 })
