@@ -40,5 +40,14 @@ describe('Add functionality in calculator', () => {
     expect(add('-10,-20,-2,-10')).toBe(-42)
     expect(add('-10,10,20,-20,30,-30')).toBe(0)
   })
+  
+  test('should return the correct sum for input string delimited by new lines', () => {
+    expect(add('1\n2,3')).toBe(6);
+    expect(add('1\n2\n3')).toBe(6);
+    expect(add('1,\n2,3')).toBe(6);
+    expect(add('\n1,2,3')).toBe(6);
+    expect(add('\n\n1,2,3')).toBe(6);
+    expect(add('\n')).toBe(0);
+  });
 
 })
