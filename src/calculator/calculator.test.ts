@@ -6,7 +6,7 @@ describe('Add functionality in calculator', () => {
 
   test('should throw error if arg is undefined', () => {
       // @ts-ignore for checking the negative test case
-      expect(add()).toThrowError()
+      expect(() => add()).toThrowError('Input is undefined')
     })
 
   test('should return 0 for empty string as arg', () => {
@@ -26,9 +26,9 @@ describe('Add functionality in calculator', () => {
     })
 
   test('should throw error if the inputs are not number', () => {
-    expect(add('a')).toThrowError()
-    expect(add('6,a')).toThrowError()
-    expect(add('@@@,a23')).toThrowError()
-    expect(add('@@@,5')).toThrowError()
+    expect(() => add('a')).toThrowError('Invalid number')
+    expect(() => add('6,a')).toThrowError('Invalid number')
+    expect(() => add('@@@,a23')).toThrowError('Invalid number')
+    expect(() => add('@@@,5')).toThrowError('Invalid number')
   })
 })
