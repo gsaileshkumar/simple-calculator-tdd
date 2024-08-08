@@ -50,4 +50,19 @@ describe('Add functionality in calculator', () => {
     expect(add('\n')).toBe(0);
   });
 
+  test('should handle custom delimiter specified in the string', () => {
+    expect(add('//;1;2')).toBe(3);
+    expect(add('//|4|5|6')).toBe(15);
+    expect(add('//:7:8:9')).toBe(24);
+    expect(add('//@\n1@2@3')).toBe(6);
+  });
+
+  test('should handle custom delimiter with new line', () => {
+    expect(add('//;\n1\n2;3')).toBe(6);
+  });
+
+  test('should throw error for invalid numbers with custom delimiter', () => {
+    expect(() => add('//;\n1;a')).toThrowError('Invalid number');
+  });
+
 })
